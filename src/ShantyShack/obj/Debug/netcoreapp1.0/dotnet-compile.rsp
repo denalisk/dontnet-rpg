@@ -1,5 +1,5 @@
---temp-output:C:\Users\epicodus\Documents\Visual Studio 2015\Projects\ShantyShack\src\ShantyShack\obj\Debug\netcoreapp1.0\
---out:C:\Users\epicodus\Documents\Visual Studio 2015\Projects\ShantyShack\src\ShantyShack\bin\Debug\netcoreapp1.0\ShantyShack.dll
+--temp-output:C:\Users\epicodus\Documents\Visual Studio 2015\projects\shantyshack\src\ShantyShack\obj\Debug\netcoreapp1.0\
+--out:C:\Users\epicodus\Documents\Visual Studio 2015\projects\shantyshack\src\ShantyShack\bin\Debug\netcoreapp1.0\ShantyShack.dll
 --define:DEBUG
 --define:TRACE
 --define:NETCOREAPP1_0
@@ -200,14 +200,22 @@
 --reference:C:\Users\epicodus\.nuget\packages\System.Threading.Timer\4.0.1\ref\netstandard1.2\System.Threading.Timer.dll
 --reference:C:\Users\epicodus\.nuget\packages\System.Xml.ReaderWriter\4.0.11\ref\netstandard1.3\System.Xml.ReaderWriter.dll
 --reference:C:\Users\epicodus\.nuget\packages\System.Xml.XDocument\4.0.11\ref\netstandard1.3\System.Xml.XDocument.dll
---resource:"C:\Users\epicodus\Documents\Visual Studio 2015\Projects\ShantyShack\src\ShantyShack\obj\Debug\netcoreapp1.0\ShantyShackdotnet-compile.deps.json",ShantyShack.deps.json
-C:\Users\epicodus\Documents\Visual Studio 2015\Projects\ShantyShack\src\ShantyShack\Program.cs
-C:\Users\epicodus\Documents\Visual Studio 2015\Projects\ShantyShack\src\ShantyShack\Startup.cs
-C:\Users\epicodus\Documents\Visual Studio 2015\Projects\ShantyShack\src\ShantyShack\Controllers\AccountController.cs
-C:\Users\epicodus\Documents\Visual Studio 2015\Projects\ShantyShack\src\ShantyShack\Migrations\20170426161948_Initial.cs
-C:\Users\epicodus\Documents\Visual Studio 2015\Projects\ShantyShack\src\ShantyShack\Migrations\20170426161948_Initial.Designer.cs
-C:\Users\epicodus\Documents\Visual Studio 2015\Projects\ShantyShack\src\ShantyShack\Migrations\ShantyShackDbContextModelSnapshot.cs
-C:\Users\epicodus\Documents\Visual Studio 2015\Projects\ShantyShack\src\ShantyShack\Models\ApplicationUser.cs
-C:\Users\epicodus\Documents\Visual Studio 2015\Projects\ShantyShack\src\ShantyShack\Models\ShantyShackDbContext.cs
-C:\Users\epicodus\Documents\Visual Studio 2015\Projects\ShantyShack\src\ShantyShack\ViewModels\LoginViewModel.cs
-C:\Users\epicodus\Documents\Visual Studio 2015\Projects\ShantyShack\src\ShantyShack\ViewModels\RegisterViewModel.cs
+--resource:"C:\Users\epicodus\Documents\Visual Studio 2015\projects\shantyshack\src\ShantyShack\obj\Debug\netcoreapp1.0\ShantyShackdotnet-compile.deps.json",ShantyShack.deps.json
+C:\Users\epicodus\Documents\Visual Studio 2015\projects\shantyshack\src\ShantyShack\Program.cs
+C:\Users\epicodus\Documents\Visual Studio 2015\projects\shantyshack\src\ShantyShack\Startup.cs
+C:\Users\epicodus\Documents\Visual Studio 2015\projects\shantyshack\src\ShantyShack\Controllers\AccountController.cs
+C:\Users\epicodus\Documents\Visual Studio 2015\projects\shantyshack\src\ShantyShack\Controllers\ProfileController.cs
+C:\Users\epicodus\Documents\Visual Studio 2015\projects\shantyshack\src\ShantyShack\Migrations\20170426170104_Initial.cs
+C:\Users\epicodus\Documents\Visual Studio 2015\projects\shantyshack\src\ShantyShack\Migrations\20170426170104_Initial.Designer.cs
+C:\Users\epicodus\Documents\Visual Studio 2015\projects\shantyshack\src\ShantyShack\Migrations\20170426171659_Profiles.cs
+C:\Users\epicodus\Documents\Visual Studio 2015\projects\shantyshack\src\ShantyShack\Migrations\20170426171659_Profiles.Designer.cs
+C:\Users\epicodus\Documents\Visual Studio 2015\projects\shantyshack\src\ShantyShack\Migrations\ShantyShackDbContextModelSnapshot.cs
+C:\Users\epicodus\Documents\Visual Studio 2015\projects\shantyshack\src\ShantyShack\Models\ApplicationUser.cs
+C:\Users\epicodus\Documents\Visual Studio 2015\projects\shantyshack\src\ShantyShack\Models\Character.cs
+C:\Users\epicodus\Documents\Visual Studio 2015\projects\shantyshack\src\ShantyShack\Models\InventoryItem.cs
+C:\Users\epicodus\Documents\Visual Studio 2015\projects\shantyshack\src\ShantyShack\Models\Item.cs
+C:\Users\epicodus\Documents\Visual Studio 2015\projects\shantyshack\src\ShantyShack\Models\Perks.cs
+C:\Users\epicodus\Documents\Visual Studio 2015\projects\shantyshack\src\ShantyShack\Models\Profile.cs
+C:\Users\epicodus\Documents\Visual Studio 2015\projects\shantyshack\src\ShantyShack\Models\ShantyShackDbContext.cs
+C:\Users\epicodus\Documents\Visual Studio 2015\projects\shantyshack\src\ShantyShack\ViewModels\LoginViewModel.cs
+C:\Users\epicodus\Documents\Visual Studio 2015\projects\shantyshack\src\ShantyShack\ViewModels\RegisterViewModel.cs

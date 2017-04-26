@@ -8,9 +8,10 @@ using ShantyShack.Models;
 namespace ShantyShack.Migrations
 {
     [DbContext(typeof(ShantyShackDbContext))]
-    partial class ShantyShackDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170426171659_Profiles")]
+    partial class Profiles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")

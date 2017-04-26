@@ -13,9 +13,19 @@ namespace ShantyShack.Models
         {
 
         }
+        public DbSet<Character> Characters;
+        public DbSet<Item> Items;
+        public DbSet<Profile> Profiles;
+        public DbSet<InventoryItem> InventoryItems;
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        {
+            options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=ShantyShackDb;integrated security=True");
+        }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.Entity<InventoryItem>().HasKey(x => new { x.CharacterId, x.ItemId });
         }
+
     }
 }

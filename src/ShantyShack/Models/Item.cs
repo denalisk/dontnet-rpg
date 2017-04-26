@@ -6,14 +6,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ShantyShack.Models
 {
-    public class Character
+    public class Item
     {
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        public int Level { get; set; }
-        public string Archetype { get; set; }
-        public virtual Profile Profile { get; set; }
         public virtual Perks Perks { get; set; }
         public virtual ICollection<InventoryItem> InventoryItems { get; set; }
     }

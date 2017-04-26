@@ -63,6 +63,22 @@ namespace ShantyShack.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Perks",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Dexterity = table.Column<int>(nullable: false),
+                    Health = table.Column<int>(nullable: false),
+                    Luck = table.Column<int>(nullable: false),
+                    Strength = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Perks", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -148,6 +164,72 @@ namespace ShantyShack.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Character",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Archetype = table.Column<string>(nullable: true),
+                    Level = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    PerksId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Character", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Character_Perks_PerksId",
+                        column: x => x.PerksId,
+                        principalTable: "Perks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Item",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    PerksId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Item", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Item_Perks_PerksId",
+                        column: x => x.PerksId,
+                        principalTable: "Perks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "InventoryItem",
+                columns: table => new
+                {
+                    CharacterId = table.Column<int>(nullable: false),
+                    ItemId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InventoryItem", x => new { x.CharacterId, x.ItemId });
+                    table.ForeignKey(
+                        name: "FK_InventoryItem_Character_CharacterId",
+                        column: x => x.CharacterId,
+                        principalTable: "Character",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_InventoryItem_Item_ItemId",
+                        column: x => x.ItemId,
+                        principalTable: "Item",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
@@ -188,6 +270,26 @@ namespace ShantyShack.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Character_PerksId",
+                table: "Character",
+                column: "PerksId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_InventoryItem_CharacterId",
+                table: "InventoryItem",
+                column: "CharacterId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_InventoryItem_ItemId",
+                table: "InventoryItem",
+                column: "ItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Item_PerksId",
+                table: "Item",
+                column: "PerksId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -208,10 +310,22 @@ namespace ShantyShack.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "InventoryItem");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Character");
+
+            migrationBuilder.DropTable(
+                name: "Item");
+
+            migrationBuilder.DropTable(
+                name: "Perks");
         }
     }
 }

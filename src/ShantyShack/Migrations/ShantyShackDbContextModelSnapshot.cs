@@ -193,7 +193,7 @@ namespace ShantyShack.Migrations
 
                     b.HasIndex("ProfileId");
 
-                    b.ToTable("Character");
+                    b.ToTable("Characters");
                 });
 
             modelBuilder.Entity("ShantyShack.Models.InventoryItem", b =>
@@ -208,7 +208,7 @@ namespace ShantyShack.Migrations
 
                     b.HasIndex("ItemId");
 
-                    b.ToTable("InventoryItem");
+                    b.ToTable("InventoryItems");
                 });
 
             modelBuilder.Entity("ShantyShack.Models.Item", b =>
@@ -224,7 +224,7 @@ namespace ShantyShack.Migrations
 
                     b.HasIndex("PerksId");
 
-                    b.ToTable("Item");
+                    b.ToTable("Items");
                 });
 
             modelBuilder.Entity("ShantyShack.Models.Perks", b =>
@@ -256,7 +256,7 @@ namespace ShantyShack.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Profile");
+                    b.ToTable("Profiles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

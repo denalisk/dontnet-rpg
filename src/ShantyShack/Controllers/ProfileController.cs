@@ -8,12 +8,12 @@ using Microsoft.AspNetCore.Authorization;
 using ShantyShack.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using ShantyShack.ViewModels;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ShantyShack.Controllers
 {
-    [Authorize]
     public class ProfileController : Controller
     {
         private readonly ShantyShackDbContext _db;
@@ -26,10 +26,20 @@ namespace ShantyShack.Controllers
         }
 
         // GET: /<controller>/
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var currentUser = await _userManager.FindByIdAsync(userId);
+            var currentProfile = _db.Profiles.FirstOrDefault(profile => profile.User == currentUser);
+            currentProfile.User = currentUser;
+            return View(currentProfile);
+        }
 
-            return View();
+        public IActionResult Test()
+        {
+            int targetId = 1;
+            var thisPerk = _db.Perks.FirstOrDefault(perks => perks.Id == targetId);
+            return View(thisPerk);
         }
     }
 }

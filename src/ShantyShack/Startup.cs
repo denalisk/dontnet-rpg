@@ -50,7 +50,7 @@ namespace ShantyShack
                     name: "default",
                     template: "{controller=Account}/{action=Index}/{id?}");
             });
-            loggerFactory.AddConsole();
+            loggerFactory.AddDebug(LogLevel.Debug);
 
             if (env.IsDevelopment())
             {

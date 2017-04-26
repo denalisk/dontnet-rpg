@@ -40,8 +40,20 @@ namespace ShantyShack.Controllers
         {
             var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
             IdentityResult result = await _userManager.CreateAsync(user, model.Password);
+            
             if (result.Succeeded)
             {
+                Microsoft.AspNetCore.Identity.SignInResult resultLogin = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, isPersistent: true, lockoutOnFailure: false);
+                if (resultLogin.Succeeded)
+                {
+                    var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                    var currentUser = await _userManager.FindByIdAsync(user.Id);
+                    Profile createProfile = new Profile { User = currentUser };
+                    _db.Profiles.Add(createProfile);
+                    _db.SaveChanges();
+
+                }
+
                 return RedirectToAction("Index");
             }
             else

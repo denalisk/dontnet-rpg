@@ -1,5 +1,27 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using ShantyShack.Models
+@using ShantyShack.ViewModels
+@model ShantyShack.Models.Profile
+
 @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<h4>Worked</h4>
+<h4>Hello, @Model.User.UserName</h4>
+@*<h4>Hello, @Model.User.UserName</h4>*@
+
+@*@if(Model.Characters.Any())
+{
+    <h5>Welcome to your Character list, here are your current Characters</h5>
+    @foreach(var character in Model.Characters)
+    {
+        <h3>character.Name</h3>
+        <h3>character.Level</h3>
+        <h3>character.Archetype</h3>
+    }
+    <p>@Html.ActionLink("Create New Character", "Create", "Character")</p>
+}
+else
+{
+    <p>@Html.ActionLink("Create First Character", "Create", "Character")</p>
+}*@

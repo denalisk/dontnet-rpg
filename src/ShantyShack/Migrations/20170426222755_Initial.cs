@@ -165,7 +165,46 @@ namespace ShantyShack.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Character",
+                name: "Profiles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Profiles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Profiles_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Items",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    PerksId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Items", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Items_Perks_PerksId",
+                        column: x => x.PerksId,
+                        principalTable: "Perks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Characters",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -173,41 +212,28 @@ namespace ShantyShack.Migrations
                     Archetype = table.Column<string>(nullable: true),
                     Level = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    PerksId = table.Column<int>(nullable: true)
+                    PerksId = table.Column<int>(nullable: true),
+                    ProfileId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Character", x => x.Id);
+                    table.PrimaryKey("PK_Characters", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Character_Perks_PerksId",
+                        name: "FK_Characters_Perks_PerksId",
                         column: x => x.PerksId,
                         principalTable: "Perks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Characters_Profiles_ProfileId",
+                        column: x => x.ProfileId,
+                        principalTable: "Profiles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Item",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    PerksId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Item", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Item_Perks_PerksId",
-                        column: x => x.PerksId,
-                        principalTable: "Perks",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "InventoryItem",
+                name: "InventoryItems",
                 columns: table => new
                 {
                     CharacterId = table.Column<int>(nullable: false),
@@ -215,17 +241,17 @@ namespace ShantyShack.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_InventoryItem", x => new { x.CharacterId, x.ItemId });
+                    table.PrimaryKey("PK_InventoryItems", x => new { x.CharacterId, x.ItemId });
                     table.ForeignKey(
-                        name: "FK_InventoryItem_Character_CharacterId",
+                        name: "FK_InventoryItems_Characters_CharacterId",
                         column: x => x.CharacterId,
-                        principalTable: "Character",
+                        principalTable: "Characters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_InventoryItem_Item_ItemId",
+                        name: "FK_InventoryItems_Items_ItemId",
                         column: x => x.ItemId,
-                        principalTable: "Item",
+                        principalTable: "Items",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -272,24 +298,34 @@ namespace ShantyShack.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Character_PerksId",
-                table: "Character",
+                name: "IX_Characters_PerksId",
+                table: "Characters",
                 column: "PerksId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InventoryItem_CharacterId",
-                table: "InventoryItem",
+                name: "IX_Characters_ProfileId",
+                table: "Characters",
+                column: "ProfileId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_InventoryItems_CharacterId",
+                table: "InventoryItems",
                 column: "CharacterId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InventoryItem_ItemId",
-                table: "InventoryItem",
+                name: "IX_InventoryItems_ItemId",
+                table: "InventoryItems",
                 column: "ItemId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Item_PerksId",
-                table: "Item",
+                name: "IX_Items_PerksId",
+                table: "Items",
                 column: "PerksId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Profiles_UserId",
+                table: "Profiles",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -310,22 +346,25 @@ namespace ShantyShack.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "InventoryItem");
+                name: "InventoryItems");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Characters");
 
             migrationBuilder.DropTable(
-                name: "Character");
+                name: "Items");
 
             migrationBuilder.DropTable(
-                name: "Item");
+                name: "Profiles");
 
             migrationBuilder.DropTable(
                 name: "Perks");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }

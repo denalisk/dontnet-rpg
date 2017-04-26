@@ -11,12 +11,8 @@ namespace ShantyShack.Models
     {
         public ShantyShackDbContext(DbContextOptions options) : base(options)
         {
-
+            
         }
-        public DbSet<Character> Characters;
-        public DbSet<Item> Items;
-        public DbSet<Profile> Profiles;
-        public DbSet<InventoryItem> InventoryItems;
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=ShantyShackDb;integrated security=True");
@@ -26,6 +22,11 @@ namespace ShantyShack.Models
             base.OnModelCreating(builder);
             builder.Entity<InventoryItem>().HasKey(x => new { x.CharacterId, x.ItemId });
         }
+        public DbSet<Character> Characters;
+        public DbSet<Item> Items;
+        public DbSet<Profile> Profiles;
+        public DbSet<Perks> Perks;
+        public DbSet<InventoryItem> InventoryItems;
 
     }
 }

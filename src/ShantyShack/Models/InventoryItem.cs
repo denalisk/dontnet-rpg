@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ShantyShack.Models
 {
+    [Table("InventoryItems")]
     public class InventoryItem
     {
         public int CharacterId { get; set; } 

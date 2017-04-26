@@ -8,7 +8,7 @@ using ShantyShack.Models;
 namespace ShantyShack.Migrations
 {
     [DbContext(typeof(ShantyShackDbContext))]
-    [Migration("20170426170104_Initial")]
+    [Migration("20170426222755_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -186,11 +186,15 @@ namespace ShantyShack.Migrations
 
                     b.Property<int?>("PerksId");
 
+                    b.Property<int?>("ProfileId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("PerksId");
 
-                    b.ToTable("Character");
+                    b.HasIndex("ProfileId");
+
+                    b.ToTable("Characters");
                 });
 
             modelBuilder.Entity("ShantyShack.Models.InventoryItem", b =>
@@ -205,7 +209,7 @@ namespace ShantyShack.Migrations
 
                     b.HasIndex("ItemId");
 
-                    b.ToTable("InventoryItem");
+                    b.ToTable("InventoryItems");
                 });
 
             modelBuilder.Entity("ShantyShack.Models.Item", b =>
@@ -221,7 +225,7 @@ namespace ShantyShack.Migrations
 
                     b.HasIndex("PerksId");
 
-                    b.ToTable("Item");
+                    b.ToTable("Items");
                 });
 
             modelBuilder.Entity("ShantyShack.Models.Perks", b =>
@@ -240,6 +244,20 @@ namespace ShantyShack.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Perks");
+                });
+
+            modelBuilder.Entity("ShantyShack.Models.Profile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Profiles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
@@ -284,6 +302,10 @@ namespace ShantyShack.Migrations
                     b.HasOne("ShantyShack.Models.Perks", "Perks")
                         .WithMany()
                         .HasForeignKey("PerksId");
+
+                    b.HasOne("ShantyShack.Models.Profile", "Profile")
+                        .WithMany("Characters")
+                        .HasForeignKey("ProfileId");
                 });
 
             modelBuilder.Entity("ShantyShack.Models.InventoryItem", b =>
@@ -304,6 +326,13 @@ namespace ShantyShack.Migrations
                     b.HasOne("ShantyShack.Models.Perks", "Perks")
                         .WithMany()
                         .HasForeignKey("PerksId");
+                });
+
+            modelBuilder.Entity("ShantyShack.Models.Profile", b =>
+                {
+                    b.HasOne("ShantyShack.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
         }
     }
